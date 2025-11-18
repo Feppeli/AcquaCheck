@@ -1,0 +1,104 @@
+/* ------------------------------------------------------------------- */
+/* Global Reset and Layout */
+/* ------------------------------------------------------------------- */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f9; /* Fundo suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+
+/* ------------------------------------------------------------------- */
+/* Estilo do Formulário (Container Principal) */
+/* ------------------------------------------------------------------- */
+
+form {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px; /* Limita a largura do formulário */
+    text-align: center;
+}
+
+form label{
+    text-align: left !important;
+}
+
+h1 {
+    color: #334455;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #5a8bd8;
+    padding-bottom: 10px;
+}
+
+/* ------------------------------------------------------------------- */
+/* Estilo do Select (Dropdown) */
+/* ------------------------------------------------------------------- */
+
+div {
+    margin-bottom: 20px;
+}
+
+#local {
+    /* Aparência */
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1em;
+    color: #333;
+    
+    /* Borda e Fundo */
+    border: 1px solid #c0c0c0;
+    border-radius: 8px;
+    background-color: #eef2f5;
+    
+    /* Remoção da aparência padrão do navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    /* Cursor */
+    cursor: pointer;
+    
+    /* Transição para efeito hover/focus */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#local:hover {
+    border-color: #5a8bd8;
+}
+
+#local:focus {
+    border-color: #5a8bd8;
+    box-shadow: 0 0 0 3px rgba(90, 139, 216, 0.3); /* Efeito de foco azul */
+    outline: none; /* Remove o outline padrão */
+}
+
+/* Estilo para as opções (dentro do select) */
+#local option {
+    padding: 10px;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.nextButton{
+    padding: 1rem;
+    width: 100%;
+    border-radius:8px;
+    border: none;
+    background: greenyellow;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.nextButton:hover{
+    background: white;
+}
