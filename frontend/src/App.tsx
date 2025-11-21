@@ -5,6 +5,7 @@ import FormSelector from './components/FormSelector/FormSelector'
 import FormCheckup from "./components/FormCheckup/FormCheckup";
 import LoginScreen from "./components/LoginScreen/LoginScreen";
 import CadScreen from "./components/CadScreen/CadScreen";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 
 const AppRoutes = () => {
@@ -15,6 +16,7 @@ const AppRoutes = () => {
                 <Route element={ <CadScreen /> } path="/cadUser" /> 
                 <Route element={ <FormSelector /> } path="/formLocal" /> 
                 <Route element={ <FormCheckup /> } path="/formCheckup" /> 
+                <Route element={ <Dashboard /> } path="/Dashboard-admin" /> 
             </RouterRoutes>
         </BrowserRouter>
     )
