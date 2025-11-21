@@ -9,7 +9,7 @@ const Form = () => {
 
   // 1. A Ref está definida corretamente aqui
   const selectRef = useRef<HTMLSelectElement>(null);
-  
+
   interface Local {
     name: string;
   }
@@ -27,18 +27,15 @@ const Form = () => {
     if (selectRef.current) {
       const valorSelecionado = selectRef.current.value;
 
-      // O valor será vazio ("") se o placeholder for selecionado.
-      localStorage.clear()
+      localStorage.clear();
       if (valorSelecionado) {
         localStorage.setItem("local_selecionado", valorSelecionado);
         console.log(`Valor salvo no LocalStorage: ${valorSelecionado}`);
       } else {
         console.error("Nenhum local válido foi selecionado.");
-        // Opcional: Adicione um alerta ou feedback visual aqui
-        return; 
+        return;
       }
     } else {
-      // Esta linha não deve mais ser executada após a correção no JSX
       console.error("Referência do elemento select não encontrada.");
       return;
     }
@@ -53,27 +50,16 @@ const Form = () => {
         <div>
           <label htmlFor="local">
             <p>Local:</p>
-            
-            {/* 2. CORREÇÃO: Aplique a ref={selectRef} e defina o defaultValue="" */}
-            <select 
-              name="local" 
-              id="local" 
-              ref={selectRef} 
-              defaultValue="" // O valor inicial (o placeholder)
-            >
-              
-              {/* 3. Adicione o placeholder sem a prop 'selected', usando 'value=""' */}
+            <select name="local" id="local" ref={selectRef} defaultValue="">
               <option value="" disabled hidden>
                 Selecione aqui o local
               </option>
-              
               {Locals.map((local) => (
                 <option key={local.name} value={local.name}>
                   {local.name}
                 </option>
               ))}
             </select>
-            
           </label>
         </div>
         <button className="nextButton" onClick={handleClick}>

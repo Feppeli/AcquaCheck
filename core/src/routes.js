@@ -5,7 +5,7 @@ const {getUser, getAllUsers, postUser, putUser, deleteUser} = require('./control
 
 router.get("/checkers", getAllCheckers)
 router.get("/check/:id", getCheck)
-router.get("/postcheck", postCheck)
+router.post("/postcheck", postCheck)
 
 
 router.get("/user/:id", getUser);

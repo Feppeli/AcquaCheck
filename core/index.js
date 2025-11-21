@@ -1,8 +1,14 @@
 const express = require('express')
 const app = express()
 const router = require('./src/routes')
-// const swaggerUi = require('swagger-ui-express');
-// const swaggerSpec = require('./swaggerConfig');
+const cors = require('cors');
+
+const frontendOrigin = 'http://localhost:5173'
+app.use(cors({
+    origin: frontendOrigin,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+}));
 
 require('dotenv').config();
 app.use(express.json());

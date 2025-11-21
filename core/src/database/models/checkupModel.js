@@ -12,7 +12,7 @@ const Check = sequelize.define('Check', {
         allowNull: false
     },
     problems:{
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         allowNull: false
     },
     component:{
