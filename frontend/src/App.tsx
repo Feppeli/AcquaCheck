@@ -3,14 +3,18 @@ import { Route, BrowserRouter, Routes as RouterRoutes } from "react-router-dom";
 
 import FormSelector from './components/FormSelector/FormSelector'
 import FormCheckup from "./components/FormCheckup/FormCheckup";
+import LoginScreen from "./components/LoginScreen/LoginScreen";
+import CadScreen from "./components/CadScreen/CadScreen";
 
 
 const AppRoutes = () => {
     return(
         <BrowserRouter>
             <RouterRoutes> 
-                <Route element={ <FormSelector /> } path="/" /> 
-                <Route element={ <FormCheckup /> } path="/form" /> 
+                <Route element={ <LoginScreen /> } path="/" /> 
+                <Route element={ <CadScreen /> } path="/cadUser" /> 
+                <Route element={ <FormSelector /> } path="/formLocal" /> 
+                <Route element={ <FormCheckup /> } path="/formCheckup" /> 
             </RouterRoutes>
         </BrowserRouter>
     )

@@ -17,7 +17,7 @@ const options = {
     ],
   },
   // Arquivos onde o swagger-jsdoc irá procurar pelos comentários JSDoc para documentação
-  apis: ['./src/routes*.js', './src/app.js'], // Ajuste o caminho conforme a estrutura do seu projeto
+  apis: ['./src/routes*.js', './index.js'], // Ajuste o caminho conforme a estrutura do seu projeto
 };
 
 const swaggerSpec = swaggerJsdoc(options);

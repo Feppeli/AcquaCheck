@@ -1,0 +1,43 @@
+.LoginContainer form{
+    margin: 1rem;
+    text-align: left;
+
+    display: flex;
+    flex-direction: column;
+}
+.LoginContainer h1{
+    text-align: center !important;
+}
+
+.LoginContainer label{
+    font-weight: bold;
+    margin-top: .5rem;
+}
+
+.LoginContainer input{
+    width: 90%;
+    padding: .5rem;
+}
+
+.LoginContainer button{
+    margin-top: 1rem;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    background: greenyellow;
+}
+
+.LoginContainer button:hover{
+    transition: .7s;
+    background: white;
+}
+
+.LoginContainer a{
+    color: black;
+    text-decoration: none;
+    text-align: center !important;
+
+    margin-top: 1rem;
+}
