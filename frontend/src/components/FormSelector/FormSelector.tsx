@@ -40,7 +40,7 @@ const Form = () => {
       return;
     }
 
-    navigate("/form");
+    navigate("/formCheckup");
   };
 
   return (

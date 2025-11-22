@@ -19,7 +19,7 @@ const CadScreen = () => {
                         <input type="email" name="email" id="email" placeholder='Informe seu email institucional'/>
                     </label>
                     <button>Entrar</button>
-                    <a href="/addUser">Realize o seu Login clicando aqui</a>
+                    <a href="/">Realize o seu Login clicando aqui</a>
                 </form>
             </div>
         </>

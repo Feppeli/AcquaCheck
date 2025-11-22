@@ -1,6 +1,16 @@
 import './LoginScreen.css'
 
+import { useNavigate } from 'react-router-dom';
+
 const LoginScreen = () => {
+
+    const navigate = useNavigate()
+
+    const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+
+        navigate('/formLocal')
+    }
     return(
         <>
            <div className='LoginContainer'>
@@ -12,8 +22,8 @@ const LoginScreen = () => {
                     <label htmlFor="">Senha:
                         <input type="password" name="senha" id="senha" placeholder='Senha'/>
                     </label>
-                    <button>Entrar</button>
-                    <a href="/addUser">Cadastre-se clicando aqui</a>
+                    <button onClick={handleLogin}>Entrar</button>
+                    <a href="/cadUser">Cadastre-se clicando aqui</a>
                 </form>
             </div>
         </>

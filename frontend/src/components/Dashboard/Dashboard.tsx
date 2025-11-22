@@ -1,14 +1,16 @@
 import './Dashboard.css'
 import React, { useState, useEffect } from 'react';
+import api from '../../api/api';
 import axios from 'axios';
 
 interface Alerta {
     id: number;
     local: string;
-    problems: string;
+    problems: string; // Se problems vier do backend como a string "false", manter string
     component: string;
     description: string;
-    data: string;
+    createdAt?: string; 
+    updatedAt?: string;
 }
 
 const Dashboard: React.FC = () => {
@@ -16,45 +18,33 @@ const Dashboard: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
+    // ... (useEffect e funções de carregamento permanecem iguais)
     useEffect(() => {
-        // 🚨 PASSO DE DEBUG 1: Use a URL completa da sua API aqui.
-        // Se a sua API estiver em 'http://localhost:8080/api/checkers', use o caminho completo.
-        // Se o Axios já está configurado globalmente, você pode manter '/checkers'.
         const API_ENDPOINT = '/checkers'; 
-        // Exemplo: const API_ENDPOINT = 'http://localhost:8080/checkers'; 
 
         const fetchAlertas = async () => {
             try {
-                const response = await axios.get<Alerta[]>(API_ENDPOINT);
+                const response = await api.get<Alerta[]>(API_ENDPOINT); 
                 
-                // 🚨 PASSO DE DEBUG 2: Imprime a resposta no console para inspeção.
                 console.log('Requisição GET bem-sucedida. Resposta recebida:', response.data);
 
-                // Garante que o que recebemos é, de fato, um array antes de setar
                 if (Array.isArray(response.data)) {
                     setAlertas(response.data);
                 } else {
-                    // Trata o caso de a API retornar um objeto único ou algo inesperado
-                    console.warn('O formato da resposta não é um array. Conteúdo:', response.data);
-                    // Se for um objeto único, você pode tentar tratá-lo aqui:
-                    // setAlertas([response.data] as Alerta[]);
+                    console.warn('O formato da resposta não é um array (Esperado JSON). Conteúdo:', response.data);
                 }
             } catch (err) {
-                // 🚨 PASSO DE DEBUG 3: Log mais detalhado em caso de erro.
                 if (axios.isAxiosError(err)) {
                     console.error('Erro de Requisição Axios (Detalhamento):', err.message);
                     
                     if (err.response) {
-                        // Erro de Resposta (Status 4xx ou 5xx)
                         console.error('Status do Servidor:', err.response.status);
                         console.error('Dados de Erro (Server Response Data):', err.response.data);
                         setError(`Erro ${err.response.status}: Falha no servidor.`);
                     } else if (err.request) {
-                        // Erro de Rede (Ex: Servidor Offline, CORS Bloqueado)
                         console.error('Servidor não respondeu. Possível falha de rede ou CORS.');
-                        setError('Erro de Rede: Não foi possível conectar ao servidor.');
+                        setError('Erro de Rede: Não foi possível conectar ao servidor (Verifique CORS!).');
                     } else {
-                        // Erro de Configuração
                         setError(`Erro na configuração da requisição: ${err.message}`);
                     }
                 } else {
@@ -69,17 +59,22 @@ const Dashboard: React.FC = () => {
         fetchAlertas();
     }, []);
 
-    // 7. Renderização Condicional (Loading e Error)
     if (loading) {
         return <div className='dashboardIsolated'>Carregando dados...</div>;
     }
-
     if (error) {
-        // Mostra a mensagem de erro detalhada definida no catch
         return <div className='dashboardIsolated'>Erro ao carregar os dados: **{error}**</div>;
     }
+
+    // Filtra apenas os alertas onde problems NÃO É "false" e não é vazio/nulo
+    const alertasAtivos = Array.isArray(alertas) 
+        ? alertas.filter(alerta => 
+            alerta.problems && 
+            alerta.problems.toLowerCase() !== 'false'
+        ) 
+        : [];
     
-    // 8. Renderização Principal do Dashboard
+    
     return (
         <div className='dashboardIsolated'>
             <nav>
@@ -92,21 +87,29 @@ const Dashboard: React.FC = () => {
                 </div>
                 <div className='mainContent'>
                     
-                    {/* Renderização Corrigida: Usa Array.isArray() para evitar o TypeError */}
-                    {Array.isArray(alertas) && alertas.length > 0 ? (
-                        alertas.map(alerta => (
-                            <div className='alert' key={alerta.id}> {/* Key na div pai do map */}
-                                <h2>Alerta!</h2>
-                                <p>Local: **{alerta.local}**</p>
-                                <p>Problema: {alerta.problems}</p>
-                                <button>Detalhes</button>
-                                <button>Solucionado</button>
-                            </div>
-                        ))
-                    ) : (
-                        // Mensagem quando a requisição funcionou, mas não retornou dados
-                        <p>Nenhum alerta encontrado.</p>
-                    )}
+                    {/* Título - Agora reflete apenas os alertas ATIVOS */}
+                    <h2>Alertas Ativos ({alertasAtivos.length})</h2>
+                    
+                    <div className='alertGrid'> 
+                        {alertasAtivos.length > 0 ? (
+                            // Mapeia APENAS o array filtrado
+                            alertasAtivos.map(alerta => (
+                                <div className='alert' key={alerta.id}> 
+                                    <h3>⚠️ Alerta em {alerta.local}</h3>
+                                    <p>Componente: **{alerta.component}**</p>
+                                    
+                                    {alerta.createdAt && <small>Registrado em: {new Date(alerta.createdAt).toLocaleDateString()}</small>}
+                                    
+                                    <div> {/* Container interno dos botões */}
+                                        <button>Detalhes</button>
+                                        <button>Solucionado</button>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p>✅ Nenhum alerta encontrado. O sistema está limpo!</p>
+                        )}
+                    </div>
                     
                 </div>
             </div>

@@ -1,86 +1,199 @@
-*{
+/* RESET E CORES BASE */
+:root {
+    /* Cores */
+    --cor-fundo-principal: #1f1f1f; /* Fundo escuro */
+    --cor-navbar: #2c2c2c;
+    --cor-sidebar: #1a1a1a;
+    --cor-texto-claro: #f0f0f0;
+    --cor-alerta-bg: #444444; /* Fundo do cartão de alerta */
+    --cor-perigo: #ff4757; /* Vermelho/Laranja para alerta */
+    --cor-sucesso: #2ecc71; /* Verde para solucionado */
+    --cor-botao-detalhes: #007bff; /* Azul para detalhes */
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Arial', sans-serif; /* Fonte padrão para melhor legibilidade */
 }
 
-body{
+body {
+    background-color: var(--cor-fundo-principal);
+    color: var(--cor-texto-claro);
     display: block;
-
 }
 
-nav{
+/* 1. LAYOUT PRINCIPAL */
+
+.dashboardIsolated {
+    min-height: 100vh;
+}
+
+/* Navbar */
+nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    text-align: center;
     width: 100%;
-    padding: 1rem;
-    background: #3f3f3f;
-
-    box-shadow: 0px 23px 34px 12px rgba(0,0,0,0.1);
+    padding: 1rem 2rem;
+    background: var(--cor-navbar);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    height: 65px; /* Altura fixa para cálculo do mainContainer */
 }
 
-nav a{
-    text-decoration: none;
-    color: white;
-    cursor: pointer;
-}
-
-.dashboardIsolated h1{
-    border-bottom: none !important;
-    padding: 0;
+nav h1 {
+    font-size: 1.8rem;
+    color: var(--cor-texto-claro);
+    letter-spacing: 1px;
+    border-bottom: none;
     margin: 0;
-    color: white;
+    padding: 0;
 }
 
-.dashboardIsolated .mainContainer{
+nav a {
+    text-decoration: none;
+    color: var(--cor-perigo); /* Destacar botão de Sair */
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255, 71, 87, 0.1);
+}
+
+/* Container Principal (Sidebar + Conteúdo) */
+.dashboardIsolated .mainContainer {
     display: flex;
     width: 100%;
-    height: calc(100vh - 65px);
+    /* 100vh menos a altura da nav */
+    height: calc(100vh - 65px); 
 }
 
-.dashboardIsolated .sideBar{
-    background: #333333;
+/* Sidebar */
+.dashboardIsolated .sideBar {
+    background: var(--cor-sidebar);
     height: 100%;
-    width: 4rem;
+    width: 60px; /* Um pouco mais largo que 4rem */
+    flex-shrink: 0; /* Garante que não diminua */
+    padding: 1rem 0;
+    border-right: 1px solid #333;
 }
 
-.mainContent{
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
+/* Conteúdo Principal */
+.mainContent {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto; /* Permite scroll apenas no conteúdo */
+    /* Layout para o Título e Alertas */
     display: flex;
-    align-items: left;
-    justify-content: start;
+    flex-direction: column; /* Título no topo, seguido pelos alertas */
+}
+
+.mainContent h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--cor-perigo); /* Linha de destaque para o título */
+    color: var(--cor-texto-claro);
+    align-self: flex-start; /* Garante que o H2 não ocupe a largura toda desnecessariamente */
+}
+
+/* Container de Alertas (para que os alertas fiquem lado a lado) */
+.mainContent > div:nth-child(2) {
+    display: flex;
     flex-wrap: wrap;
-
-    max-height: calc(100vh - 65px);
-    overflow-y: scroll;
+    gap: 20px; /* Espaçamento entre os cartões de alerta */
+    width: 100%;
 }
 
-.alert{
-    padding: 1rem;
-    margin: 1rem;
-    background: #3f3f3f;
-    width: 300px;
-    height: 180px;
 
-    border-radius:8px ;
+/* 2. ESTILIZAÇÃO DO ALERTA (Cartão) */
 
-    color: white;
-
+.alert {
+    padding: 1.5rem;
+    background: var(--cor-alerta-bg);
+    width: 320px; /* Ajuste leve */
+    border-radius: 12px;
+    color: var(--cor-texto-claro);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid var(--cor-perigo); /* Linha de destaque para alerta */
+    
     display: flex;
     flex-direction: column;
+    justify-content: space-between; /* Empurra os botões para baixo */
 }
 
-.alert > button{
-    margin-top: 2rem;
-    padding: .5rem;
+.alert:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 71, 87, 0.15);
+}
+
+.alert h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--cor-perigo); /* Cor de alerta */
+}
+
+.alert p {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.alert small {
+    display: block;
+    margin-top: 10px;
+    color: #aaaaaa;
+    font-size: 0.8rem;
+}
+
+/* Container dos Botões */
+.alert > div {
+    display: flex;
+    margin-top: auto; /* Empurra o container de botões para o final */
+    padding-top: 15px;
+    gap: 10px;
+}
+
+.alert button {
+    padding: 0.7rem 1rem;
     border: none;
-    border-radius: 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s;
+    flex-grow: 1; /* Distribui os botões uniformemente */
 }
 
-.alert button{
-    margin-top: 1rem;
+/* Botão Detalhes */
+.alert button:first-child {
+    background-color: var(--cor-botao-detalhes);
+    color: white;
+}
+
+.alert button:first-child:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Botão Solucionado */
+.alert button:last-child {
+    background-color: var(--cor-sucesso);
+    color: white;
+}
+
+.alert button:last-child:hover {
+    background-color: #27ae60;
+    transform: translateY(-1px);
+}
+
+/* Estilo para quando não há alertas */
+.mainContent > p {
+    font-size: 1.2rem;
+    color: var(--cor-sucesso);
+    margin-top: 2rem;
 }
