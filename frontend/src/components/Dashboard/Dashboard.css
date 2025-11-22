@@ -22,6 +22,8 @@ body {
     background-color: var(--cor-fundo-principal);
     color: var(--cor-texto-claro);
     display: block;
+
+    overflow-y: hidden;
 }
 
 /* 1. LAYOUT PRINCIPAL */
