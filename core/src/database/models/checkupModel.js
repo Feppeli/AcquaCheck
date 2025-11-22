@@ -22,6 +22,10 @@ const Check = sequelize.define('Check', {
     description:{
         type: DataTypes.STRING,
         allowNull: true
+    },
+    solution: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 
 })
