@@ -1,5 +1,13 @@
+.formCheckupContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .formCheckup{
-    margin-top: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: .5rem;
 }
 
 .formContainer{

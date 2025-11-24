@@ -1,3 +1,11 @@
+.LoginContainer{
+    background: white !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
 .LoginContainer form{
     margin: 1rem;
     text-align: left;
@@ -12,10 +20,11 @@
 .LoginContainer label{
     font-weight: bold;
     margin-top: .5rem;
+    color: black;
 }
 
 .LoginContainer input{
-    width: 90%;
+    width: 100%;
     padding: .5rem;
 }
 

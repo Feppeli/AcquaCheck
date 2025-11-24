@@ -93,39 +93,41 @@ const FormCheckup: React.FC = () => {
     };
 
     return (
-        <form className="formCheckup" onSubmit={handleSubmit}>
-            <h1>Checkup</h1>
-            <div className="formContainer">
-                {itemsStatus.map((item) => (
-                    <label key={item.name} htmlFor={item.name}>
-                        {item.name}:
-                        <select
-                            name={item.name}
-                            id={item.name}
-                            value={item.status} 
-                            onChange={(e) => handleStatusChange(item.name, e.target.value as 'Funcionando' | 'Inoperante' | '')}
-                            required 
-                        >
-                            <option value="" disabled hidden>Status</option>
-                            <option value="Funcionando">Funcionando</option>
-                            <option value="Inoperante">Inoperante</option>
-                        </select>
+        <div className='formCheckupContainer'>
+            <form className="formCheckup" onSubmit={handleSubmit}>
+                <h1>Checkup</h1>
+                <div className="formContainer">
+                    {itemsStatus.map((item) => (
+                        <label key={item.name} htmlFor={item.name}>
+                            {item.name}:
+                            <select
+                                name={item.name}
+                                id={item.name}
+                                value={item.status} 
+                                onChange={(e) => handleStatusChange(item.name, e.target.value as 'Funcionando' | 'Inoperante' | '')}
+                                required 
+                            >
+                                <option value="" disabled hidden>Status</option>
+                                <option value="Funcionando">Funcionando</option>
+                                <option value="Inoperante">Inoperante</option>
+                            </select>
+                        </label>
+                    ))}
+                    
+                    {/* Campo Descrição */}
+                    <label htmlFor="description">Descrição:
+                        <textarea
+                            name="description"
+                            id="description"
+                            placeholder="Descreva a situação que se encontra a área."
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        ></textarea>
                     </label>
-                ))}
-                
-                {/* Campo Descrição */}
-                <label htmlFor="description">Descrição:
-                    <textarea
-                        name="description"
-                        id="description"
-                        placeholder="Descreva a situação que se encontra a área."
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    ></textarea>
-                </label>
-            </div>
-            <button className="successButton" type="submit">Enviar Relatório</button>
-        </form>
+                </div>
+                <button className="successButton" type="submit">Enviar Relatório</button>
+            </form>
+        </div>
     );
 };
 

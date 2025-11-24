@@ -7,7 +7,7 @@ import ModalDetails from '../ModalDetails/ModalDetails';
 interface Alerta {
     id: number;
     local: string;
-    problems: string; // Se problems vier do backend como a string "false", manter string
+    problems: string;
     component: string;
     description: string;
     solution: string;
@@ -88,7 +88,6 @@ const Dashboard: React.FC = () => {
             alerta.solution == null // se for null, significa que está sem solução, logo deve aparecer
         ) 
         : [];
-    
     
     return (
         <div className='dashboardIsolated'>

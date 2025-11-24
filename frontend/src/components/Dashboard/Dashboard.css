@@ -19,7 +19,7 @@
 }
 
 body {
-    background-color: var(--cor-fundo-principal);
+    background-color: var(--cor-fundo-principal) !important;
     color: var(--cor-texto-claro);
     display: block;
 

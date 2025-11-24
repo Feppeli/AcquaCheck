@@ -44,7 +44,7 @@ const Form = () => {
   };
 
   return (
-    <>
+    <div className="formSelectorContainer">
       <form className="formLocalSelection" action="">
         <h1>Checkup</h1>
         <div>
@@ -66,7 +66,7 @@ const Form = () => {
           Próximo
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

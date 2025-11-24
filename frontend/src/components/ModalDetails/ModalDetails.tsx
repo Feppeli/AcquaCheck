@@ -13,7 +13,7 @@ interface Alerta {
 
 
 const ModalDetails: React.FC<Alerta> =({
-    id, local, problems, component, description, onClose
+    id, local, component, description, onClose
 })=> {
     return(
         <div className='backgroundOutFocused'> {/* Clicar fora fecha */}
@@ -21,7 +21,7 @@ const ModalDetails: React.FC<Alerta> =({
                 <h2>Detalhes do Alerta: {id}</h2>
                 <p><strong>Local:</strong> {local}</p>
                 <p><strong>Componente:</strong> {component}</p>
-                <p><strong>Problema Reportado:</strong> {problems}</p>
+                {/* <p><strong>Problema Reportado:</strong> {problems}</p> */}
                 <p><strong>Descrição Completa:</strong> {description}</p>
                 <button onClick={onClose}>Fechar</button>
             </div>
