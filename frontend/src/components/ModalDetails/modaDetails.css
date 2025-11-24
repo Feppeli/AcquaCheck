@@ -1,59 +1,37 @@
-/*
-====================================
-1. BACKGROUND (Efeito Vidro / Glassmorphism)
-====================================
-*/
+
 .backgroundOutFocused {
-    /* 🚀 CORREÇÃO: Usar fixed para cobrir toda a viewport */
     position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     
-    /* Centralização usando Flexbox */
     display: flex;
     align-items: center;
     justify-content: center;
 
     z-index: 1000;
 
-    /* 🚀 EFEITO VIDRO (GLASSMORPHISM) */
-    /* Fundo semi-transparente e ligeiramente esbranquiçado */
-    background: rgba(255, 255, 255, 0.05); /* Mais sutil */
-    
-    /* Aplica o blur no fundo da página atrás do modal */
-    backdrop-filter: blur(8px); /* Blur alto para forte efeito de vidro */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px); 
-    
-    /* Sombra interna sutil para dar profundidade ao "vidro" */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); 
 }
 
-
-/*
-====================================
-2. CONTEÚDO DO MODAL (CARD)
-====================================
-*/
 .modalContent {
-    /* Layout e tamanho */
     display: flex;
     flex-direction: column;
     gap: 10px; 
     max-width: 550px;
     width: 90%;
 
-    /* Aparência do card (Dark Mode) */
-    background: var(--cor-navbar); /* Use cor escura do tema */
+    background: var(--cor-navbar); 
     color: var(--cor-texto-claro);
     padding: 2.5rem;
     border-radius: 12px;
     
-    /* Borda sutil para separar do fundo de vidro */
     border: 1px solid rgba(255, 255, 255, 0.1); 
     
-    /* Sombra que destaca o modal */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
 }
 

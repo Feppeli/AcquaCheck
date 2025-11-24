@@ -1,0 +1,83 @@
+.modalSolutionContainer{
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); 
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); 
+
+}
+
+.modalSolution{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    max-width: 550px;
+    width: 90%;
+
+    background: var(--cor-navbar); 
+    color: var(--cor-texto-claro);
+    padding: 2.5rem;
+    border-radius: 12px;
+    
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+}
+
+
+
+/* Container dos Botões */
+.modalSolution > div {
+    display: flex;
+    margin-top: auto; /* Empurra o container de botões para o final */
+    padding-top: 15px;
+    gap: 10px;
+    width: 80%;
+
+}
+
+.modalSolution button {
+    padding: 0.7rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s;
+    flex-grow: 1; /* Distribui os botões uniformemente */
+
+}
+
+/* Botão Detalhes */
+.modalSolution button:first-child {
+    background-color: var(--cor-sucesso);
+    color: white;
+}
+
+.modalSolution button:first-child:hover {
+    background-color:#27ae60;
+    transform: translateY(-1px);
+}
+
+/* Botão Solucionado */
+.modalSolution button:last-child {
+    background-color: var(--cor-perigo);
+    color: white;
+}
+
+.modalSolution button:last-child:hover {
+    background-color: #ae2727;
+    transform: translateY(-1px);
+}
