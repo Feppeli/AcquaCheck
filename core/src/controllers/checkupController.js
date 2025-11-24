@@ -37,8 +37,30 @@ const postCheck = async (req, res) => {
     }
 }
 
+const editCheck = async (req, res) => {
+    try{
+        const {id} = req.params
+        const dataCheck = req.body;
+
+        const [newData] = await Check.update(dataCheck, {
+            where: {id: id}
+        })
+
+        if (newData === 0){
+            return res.status(404).json({message: 'Registro não encontrado'});
+        }
+
+        res.status(200).json({message: 'Registro atualizado com sucesso'});
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: 'Erro ao atualizar o registro'});
+    }
+}
+
 module.exports = {
     getCheck,
     getAllCheckers,
     postCheck,
+    editCheck
 }
