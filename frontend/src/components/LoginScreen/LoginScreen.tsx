@@ -3,6 +3,8 @@ import './LoginScreen.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
+// 🛑 IMPORTAÇÃO NECESSÁRIA
+import { useAuth } from '../../api/AuthContext'; // ⬅️ AJUSTE O CAMINHO CONFORME A SUA ESTRUTURA
 
 // =================================================================
 // INTERFACES DEFINIDAS NESTE ARQUIVO
@@ -34,6 +36,8 @@ const LoginScreen: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const navigate = useNavigate();
+    // 🛑 USO DO HOOK DE AUTENTICAÇÃO
+    const { login } = useAuth();
 
     const handleLogin = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault(); 
@@ -43,16 +47,19 @@ const LoginScreen: React.FC = () => {
         const credentials: UserCredentials = { email, password };
 
         try {
-            // 🛑 CORREÇÃO: Usando api.get() e enviando as credenciais via 'params'
-            // O backend deve ler estes dados via req.query.
+            // A requisição GET com params está correta para seu backend
             const response = await api.get<UserResponse>('/loginUser', { 
-                params: credentials // Dados enviados na URL (Query String)
+                params: credentials 
             }); 
 
             const userData: UserResponse = response.data; 
             
+            // 🛑 AÇÃO CRUCIAL: Salvar o usuário no estado global e localStorage
+            login(userData); 
+            
             console.log('Login bem-sucedido!', userData);
             
+            // Redireciona para a rota protegida
             navigate('/formLocal'); 
             
         } catch (err) {
