@@ -12,23 +12,45 @@ const getAllUsers = async (req, res) => {
 
 const getUser = async (req, res) => {
     try {
-        const user = await User.findByPk(req.params.id)
-        return res.status(200).json(user)
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Email e senha são obrigatórios.' });
+        }
+
+        const user = await User.findOne({ where: { email } })
+
+        if (!user) {
+            return res.status(401).json({ message: 'Credeciais invalidas' })
+        }
+
+        // Validação da Senha encryptada
+        const isMatch = await user.validPassword(req.body.password);
+
+        if (isMatch) {
+            const userResponse = user.toJSON();
+            delete userResponse.password
+
+            // Sucesso: Status 200 (OK)
+            return res.status(200).json(user)
+        } else {
+            return res.status(401).json({ message: 'Credenciais inválidas.' })
+        }
+
     } catch (err) {
-        return res.status(500).json({ message: 'Erro ao buscar usuário' })
+        console.error("Erro no login:", err);
+        return res.status(500).json({ message: 'Ocorreu um erro interno no servidor.' });
     }
 }
 
 const postUser = async (req, res) => {
     try {
-        const { name, email, password, status, admin } = req.body;
+        const { name, email, password } = req.body;
 
         const newUser = await User.create({
             name,
             email,
             password,
-            status,
-            admin
         })
 
         return res.status(201).json({ message: "Usuário cadastrado com sucesso!", user: newUser })
@@ -64,17 +86,17 @@ const deleteUser = async (req, res) => {
     const userId = req.params.id
     try {
         const userDeleted = await User.destroy({
-            where:{
+            where: {
                 id: userId
             }
         })
 
-        if (userDeleted == null){
+        if (userDeleted == null) {
             return res.status(404).json({ message: "Registro não encontrado" });
         }
 
-        return res.status(200).json({message: 'Registro deletado com sucesso!'})
-        
+        return res.status(200).json({ message: 'Registro deletado com sucesso!' })
+
     } catch (error) {
         res.status(500).json({ message: 'Erro ao deletar o registro' });
     }

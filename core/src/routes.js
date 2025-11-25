@@ -8,7 +8,7 @@ router.get("/check/:id", getCheck)
 router.post("/postcheck", postCheck)
 router.put("/editCheck/:id", editCheck)
 
-router.get("/user/:id", getUser);
+router.get("/user", getUser);
 router.get("/users", getAllUsers);
 router.post("/user", postUser);
 router.put("/user/:id", putUser);

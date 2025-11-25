@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../db')
+const bcrypt = require('bcryptjs')
 
 const User = sequelize.define('User', {
   id: {
@@ -32,6 +33,26 @@ const User = sequelize.define('User', {
     defaultValue: false,
     allowNull: false
   }
-})
+}, {
+  // Configurações de criptografia
+  hooks: {
+    beforeCreate: async (user) =>{
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(user.password, salt);
+    },
+    beforeUpdate: async (user) => {
+      if (user.changed('password')) {
+        // CORREÇÃO: Usar bcrypt.genSalt
+        const salt = await bcrypt.genSalt(10); 
+        user.password = await bcrypt.hash(user.password, salt)
+      }
+    }
+  }
+});
+
+// CORREÇÃO: Mudar de valodPassword para validPassword
+User.prototype.validPassword = function(password){
+  return bcrypt.compare(password, this.password)
+}
 
 module.exports = User;
