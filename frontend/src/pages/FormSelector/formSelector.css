@@ -19,6 +19,7 @@ body {
     justify-content: center;
     width: 100vw;
     height: 100vh;
+    background:  rgba(255, 255, 255, 0.935) !important;
 
 }
 
@@ -39,6 +40,7 @@ form {
 
 form label{
     text-align: left !important;
+    color: black;
 }
 
 h1 {

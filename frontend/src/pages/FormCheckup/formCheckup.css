@@ -2,6 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background:  rgba(255, 255, 255, 0.935) !important;
+    height: 100vh;
 }
 
 .formCheckup{

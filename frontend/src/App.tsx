@@ -1,11 +1,11 @@
 
 import { Route, BrowserRouter, Routes as RouterRoutes } from "react-router-dom"; 
 
-import FormSelector from './components/FormSelector/FormSelector'
-import FormCheckup from "./components/FormCheckup/FormCheckup";
-import LoginScreen from "./components/LoginScreen/LoginScreen";
-import CadScreen from "./components/CadScreen/CadScreen";
-import Dashboard from "./components/Dashboard/Dashboard";
+import FormSelector from './pages/FormSelector/FormSelector'
+import FormCheckup from "./pages/FormCheckup/FormCheckup";
+import LoginScreen from "./pages/LoginScreen/LoginScreen";
+import CadScreen from "./pages/CadScreen/CadScreen";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import { AuthProvider } from "./api/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 

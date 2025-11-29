@@ -2,8 +2,8 @@ import './Dashboard.css'
 import React, { useState, useEffect } from 'react';
 import api from '../../api/api';
 import axios from 'axios';
-import ModalDetails from '../ModalDetails/ModalDetails';
-import ModalSolution from '../ModalSolution/ModalSolution';
+import ModalDetails from '../../components/ModalDetails/ModalDetails';
+import ModalSolution from '../../components/ModalSolution/ModalSolution';
 
 interface Alerta {
     id: number;
