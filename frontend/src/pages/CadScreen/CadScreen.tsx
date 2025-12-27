@@ -1,5 +1,6 @@
 import {useState, type ChangeEvent, type FormEvent} from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import api from '../../api/api';
 import './CadScreen.css'
 
@@ -51,10 +52,15 @@ const CadScreen: React.FC = () => {
                 alert("Usuário cadastrado com sucesso!");
                 navigate('/')
             }
-        }catch(err: any){
+        }catch(err){
             console.error('Erro ao cadastrar:', err);
-            const errorMsg = err.response.data?.message || 'Erro ao realizar cadastro.';
-            alert(errorMsg);
+
+            if(axios.isAxiosError(err)){
+                const errorMsg = err.response?.data?.message || ' Erro ao realizar cadastro';
+                alert(errorMsg)
+            }else{
+                alert('Ocorreu um erro inesperado.')
+            }
         }finally{
             setLoading(false);
         }
