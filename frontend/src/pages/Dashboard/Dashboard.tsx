@@ -128,12 +128,18 @@ const Dashboard: React.FC = () => {
             alerta.solution == null // se for null, significa que está sem solução, logo deve aparecer
         ) 
         : [];
+
+    const handleQuit = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        event.preventDefault();
+        localStorage.clear();
+        window.location.href = '/'
+    }
     
     return (
         <div className='dashboardIsolated'>
             <nav>
                 <h1>AcquaCheck</h1>
-                <a href="/">Sair</a>
+                <a href="#" onClick={handleQuit}>Sair</a>
             </nav>
             <div className='mainContainer'>
                 <div className='sideBar'>
