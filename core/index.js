@@ -5,8 +5,9 @@ const router = require('./src/routes')
 const cors = require('cors');
 
 const frontendOrigin = 'http://localhost:5173'
+const frontendRender = 'https://acquacheck.onrender.com';
 app.use(cors({
-    origin: frontendOrigin,
+    origin: [frontendOrigin, frontendRender],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }));
