@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const router = require('./src/routes')
@@ -10,7 +11,6 @@ app.use(cors({
     credentials: true,
 }));
 
-require('dotenv').config();
 app.use(express.json());
 
 app.use(router)
@@ -23,7 +23,6 @@ app.use(router)
 // );
 
 
-app.listen(process.env.PORT, () => {
-    console.log(`Servidor rodando na porta ${process.env.PORT}`);
-    console.log(`🔥http://localhost:${process.env.PORT}`)
+app.listen(process.env.SERVER_PORT, () => {
+    console.log(`🔥http://localhost:${process.env.SERVER_PORT}`)
 })

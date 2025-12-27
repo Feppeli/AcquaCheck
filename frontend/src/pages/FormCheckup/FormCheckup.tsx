@@ -77,7 +77,8 @@ const FormCheckup: React.FC = () => {
         try {
             const response = await api.post('/postcheck', payload);
             console.log('Resposta do Servidor:', response.data);
-            navigate('/'); 
+            alert('Relatório enviado com sucesso')
+            navigate('/formLocal'); 
 
         } catch (error) {
             if (axios.isAxiosError(error)) {
